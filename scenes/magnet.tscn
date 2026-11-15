@@ -9,7 +9,6 @@ size = Vector2(12, 12)
 [node name="Magnet" type="RigidBody2D" unique_id=587740269]
 mass = 0.3
 script = ExtResource("2_magnet")
-tip_length = 6.0
 hold_offset = Vector2(0, -11)
 collides_when_held = false
 

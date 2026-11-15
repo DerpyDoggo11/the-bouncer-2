@@ -1,34 +1,27 @@
 [gd_scene format=3 uid="uid://dy2jygwbinc5r"]
 
-[ext_resource type="Texture2D" uid="uid://daot6b0f84jpl" path="res://assets/uiItemSelectionAvailableAndUnavailableItems.png" id="1_qw0r6"]
-[ext_resource type="Script" path="res://scripts/inventory.gd" id="2_inv"]
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_hj2ta"]
-atlas = ExtResource("1_qw0r6")
-region = Rect2(0, 0, 48, 48)
+[ext_resource type="Texture2D" uid="uid://dgn7phv2drwoo" path="res://assets/uiItemSelectionAvailableAndUnavailableItems-sheet.png" id="2_hj2ta"]
+[ext_resource type="Script" uid="uid://crk85o80uuo84" path="res://scripts/inventory.gd" id="2_inv"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ty45s"]
-atlas = ExtResource("1_qw0r6")
-region = Rect2(0, 48, 48, 48)
+atlas = ExtResource("2_hj2ta")
+region = Rect2(0, 0, 48, 48)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_53g1v"]
-atlas = ExtResource("1_qw0r6")
-region = Rect2(0, 96, 48, 48)
+atlas = ExtResource("2_hj2ta")
+region = Rect2(0, 48, 48, 48)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_yyk2a"]
-atlas = ExtResource("1_qw0r6")
-region = Rect2(0, 144, 48, 48)
+atlas = ExtResource("2_hj2ta")
+region = Rect2(0, 96, 48, 48)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_uae8j"]
-atlas = ExtResource("1_qw0r6")
+atlas = ExtResource("2_hj2ta")
 region = Rect2(0, 192, 48, 48)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_24o6i"]
 animations = [{
 "frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_hj2ta")
-}, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_ty45s")
 }, {

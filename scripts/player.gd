@@ -1,6 +1,6 @@
 extends RigidBody2D
 
-const LAUNCH_POWER := 10.0
+const LAUNCH_POWER := 6.5
 const MAX_PULL := 60.0
 const GRAB_RADIUS := 16.0
 const SLOW_MO := 0.2

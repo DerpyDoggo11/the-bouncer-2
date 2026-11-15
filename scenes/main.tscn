@@ -15,13 +15,13 @@
 position = Vector2(14, -12)
 
 [node name="Stick" parent="." unique_id=74791253 instance=ExtResource("3_sugp2")]
-position = Vector2(126, -47)
+position = Vector2(113, -313)
 
 [node name="Skateboard" parent="." unique_id=1687774358 instance=ExtResource("4_skate")]
-position = Vector2(-58, -95)
+position = Vector2(-154, -313)
 
 [node name="Magnet" parent="." unique_id=1780770223 instance=ExtResource("5_magnet")]
-position = Vector2(45, -11)
+position = Vector2(161, -51)
 
 [node name="Pogostick" parent="." unique_id=385510732 instance=ExtResource("6_pogo")]
-position = Vector2(43, -101)
+position = Vector2(-372, -286)

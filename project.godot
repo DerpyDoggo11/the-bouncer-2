@@ -22,10 +22,10 @@ window/stretch/aspect="expand"
 
 [physics]
 
-common/physics_interpolation=true
-
 3d/physics_engine="Jolt Physics"
+common/physics_interpolation=true
 
 [rendering]
 
 rendering_device/driver.windows="d3d12"
+environment/defaults/default_clear_color=Color(0.32907578, 0.6027462, 0.7406299, 1)

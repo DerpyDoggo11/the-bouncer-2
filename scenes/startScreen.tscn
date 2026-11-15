@@ -1,0 +1,43 @@
+[gd_scene format=3 uid="uid://dnvbxxicpdl0p"]
+
+[ext_resource type="Texture2D" uid="uid://cawjg30oe7d0l" path="res://assets/pickaxe.png" id="1_mk17b"]
+[ext_resource type="Texture2D" uid="uid://cfacr3vthj15s" path="res://icon.svg" id="2_fkpoo"]
+[ext_resource type="Script" uid="uid://bukk6ae67uvd8" path="res://scripts/start_screen.gd" id="3_start"]
+
+[node name="Control" type="Control" unique_id=2082057658]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("3_start")
+
+[node name="StartButton" type="Button" parent="." unique_id=130559783]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 146.0
+offset_right = -1036.0
+offset_bottom = -471.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Start"
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=860749843]
+
+[node name="Pickaxe" type="Sprite2D" parent="." unique_id=1926319582]
+texture_filter = 1
+position = Vector2(1000, 117)
+scale = Vector2(5, 5)
+texture = ExtResource("1_mk17b")
+
+[node name="UFO" type="Sprite2D" parent="." unique_id=1531303070]
+position = Vector2(304, 85)
+texture = ExtResource("2_fkpoo")
+
+[node name="Player" type="Sprite2D" parent="." unique_id=1179972770]
+position = Vector2(301, 58)
+scale = Vector2(0.3515625, 0.3515625)
+texture = ExtResource("2_fkpoo")

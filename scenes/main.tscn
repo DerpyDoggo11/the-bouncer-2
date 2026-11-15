@@ -24,4 +24,4 @@ position = Vector2(-154, -313)
 position = Vector2(161, -51)
 
 [node name="Pogostick" parent="." unique_id=385510732 instance=ExtResource("6_pogo")]
-position = Vector2(-372, -286)
+position = Vector2(407, -29)

@@ -11,9 +11,13 @@ config_version=5
 [application]
 
 config/name="The Bouncer 2"
-run/main_scene="uid://do4ex16x2l4su"
+run/main_scene="uid://dnvbxxicpdl0p"
 config/features=PackedStringArray("4.7", "Forward Plus")
 config/icon="res://icon.svg"
+
+[autoload]
+
+Fade="*res://scripts/fade.gd"
 
 [display]
 

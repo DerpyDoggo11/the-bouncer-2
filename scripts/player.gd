@@ -5,22 +5,26 @@ const MAX_PULL := 60.0
 const GRAB_RADIUS := 16.0
 const SLOW_MO := 0.2
 const DOT_COUNT := 20
-const DOT_STEP := 0.05 # seconds of flight between dots
+const DOT_STEP := 0.05
 const DOT_SIZE := 2.0
-const TURN_SPEED := 6.0 # radians per second from A/D or arrow keys
-const TURN_RESPONSE := 10.0 # how quickly spin reaches TURN_SPEED
-const ZOOM_OUT_SPEED := 600.0 # speed (px/s) at which zoom halves
+const TURN_SPEED := 6.0
+const TURN_RESPONSE := 10.0
+const ZOOM_OUT_SPEED := 600.0
 const MIN_ZOOM_FACTOR := 0.4
 const ZOOM_SMOOTHING := 3.0
 const LOOK_AHEAD := 0.08 # seconds of velocity the camera leads by
+const HIT_SPEED := 150.0 # impact speed that plays the hit sound
 
 @onready var camera: Camera2D = $Camera2D
 @onready var base_zoom := camera.zoom
 @onready var body_radius: float = ($CollisionShape2D.shape as CircleShape2D).radius
+@onready var jump_sound: AudioStreamPlayer = $JumpSound
+@onready var hit_sound: AudioStreamPlayer = $Hit
 
 var dragging := false
 var dots := Node2D.new()
 var dot_points: PackedVector2Array = []
+var impact_velocity := Vector2.ZERO # velocity before this physics step, since body_entered sees it post-bounce
 
 var inventory: Array[Item] = []
 var equipped: Array[Item] = []
@@ -66,6 +70,7 @@ func _physics_process(delta: float) -> void:
 		item.held_physics(self, delta)
 	_update_material()
 	_update_dots()
+	impact_velocity = linear_velocity
 
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -83,6 +88,7 @@ func _unhandled_input(event: InputEvent) -> void:
 		dragging = false
 		freeze = false # e.g. stuck by a magnet
 		linear_velocity = _launch_velocity()
+		jump_sound.play()
 
 
 func _launch_velocity() -> Vector2:
@@ -93,6 +99,8 @@ func _on_body_entered(body: Node) -> void:
 	if body is Item:
 		# Physics state can't change mid-callback.
 		_pick_up.call_deferred(body)
+	elif body is TileMapLayer and impact_velocity.length() > HIT_SPEED:
+		hit_sound.play()
 
 
 func _pick_up(item: Item) -> void:

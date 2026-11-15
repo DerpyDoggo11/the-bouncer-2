@@ -1,8 +1,22 @@
 [gd_scene format=3 uid="uid://dnvbxxicpdl0p"]
 
 [ext_resource type="Texture2D" uid="uid://cawjg30oe7d0l" path="res://assets/pickaxe.png" id="1_mk17b"]
-[ext_resource type="Texture2D" uid="uid://cfacr3vthj15s" path="res://icon.svg" id="2_fkpoo"]
+[ext_resource type="Texture2D" uid="uid://c2v1eh340pnau" path="res://assets/UfoWithGreen.png" id="3_m73xm"]
 [ext_resource type="Script" uid="uid://bukk6ae67uvd8" path="res://scripts/start_screen.gd" id="3_start"]
+[ext_resource type="Texture2D" uid="uid://b650wehrwqsh4" path="res://assets/SlimeBody.png" id="4_qnop8"]
+[ext_resource type="AudioStream" uid="uid://d215qfqu258ge" path="res://assets/universfield-punch-impact-hit-567196.mp3" id="5_qnop8"]
+
+[sub_resource type="Gradient" id="Gradient_vn56n"]
+colors = PackedColorArray(0.8630191, 0.9802715, 0.9511935, 1, 0.2763353, 0.5997197, 0.55311525, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_24o6i"]
+gradient = SubResource("Gradient_vn56n")
+width = 1
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_dclkl"]
+random_pitch = 1.4142135
+streams_count = 1
+stream_0/stream = ExtResource("5_qnop8")
 
 [node name="Control" type="Control" unique_id=2082057658]
 layout_mode = 3
@@ -13,18 +27,6 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("3_start")
 
-[node name="StartButton" type="Button" parent="." unique_id=130559783]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_top = 146.0
-offset_right = -1036.0
-offset_bottom = -471.0
-grow_horizontal = 2
-grow_vertical = 2
-text = "Start"
-
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=860749843]
 
 [node name="Pickaxe" type="Sprite2D" parent="." unique_id=1926319582]
@@ -33,11 +35,36 @@ position = Vector2(1000, 117)
 scale = Vector2(5, 5)
 texture = ExtResource("1_mk17b")
 
-[node name="UFO" type="Sprite2D" parent="." unique_id=1531303070]
-position = Vector2(304, 85)
-texture = ExtResource("2_fkpoo")
+[node name="UFOWithPlayer" type="Sprite2D" parent="." unique_id=1531303070]
+texture_filter = 1
+position = Vector2(577, 239)
+scale = Vector2(2, 2)
+texture = ExtResource("3_m73xm")
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="UFOWithPlayer" unique_id=868157726]
+position = Vector2(3, 3)
+emitting = false
+amount = 30
+texture = SubResource("GradientTexture1D_24o6i")
+one_shot = true
+explosiveness = 1.0
+direction = Vector2(0, 0)
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 800.0
+initial_velocity_max = 1000.0
+angular_velocity_min = -200.0
+angular_velocity_max = 200.0
+scale_amount_min = 20.0
+scale_amount_max = 20.0
 
 [node name="Player" type="Sprite2D" parent="." unique_id=1179972770]
-position = Vector2(301, 58)
-scale = Vector2(0.3515625, 0.3515625)
-texture = ExtResource("2_fkpoo")
+visible = false
+texture_filter = 1
+position = Vector2(579, 249)
+scale = Vector2(2, 2)
+texture = ExtResource("4_qnop8")
+
+[node name="Explosion" type="AudioStreamPlayer" parent="." unique_id=1846529957]
+stream = SubResource("AudioStreamRandomizer_dclkl")
+volume_db = -10.0

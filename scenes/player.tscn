@@ -74,7 +74,10 @@ texture = ExtResource("7_3v2ag")
 
 [node name="JumpSound" type="AudioStreamPlayer" parent="." unique_id=572799588]
 stream = SubResource("AudioStreamRandomizer_mk17b")
+volume_db = -15.0
+pitch_scale = 2.0
 
 [node name="Hit" type="AudioStreamPlayer" parent="." unique_id=1281461815]
 stream = SubResource("AudioStreamRandomizer_vg00s")
-pitch_scale = 1.5
+volume_db = -10.0
+pitch_scale = 5.0

@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://bifw6qfpoismc"]
+
+[ext_resource type="Texture2D" uid="uid://t5y06jy7f1jq" path="res://assets/BossUfoPng.png" id="1_dlmty"]
+
+[node name="Node2D" type="Node2D" unique_id=1423784332]
+
+[node name="BossUfoPng" type="Sprite2D" parent="." unique_id=1662721936]
+texture_filter = 1
+texture = ExtResource("1_dlmty")

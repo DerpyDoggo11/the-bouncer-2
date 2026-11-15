@@ -7,11 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://8t4p0lma7w6i" path="res://scenes/skateboard.tscn" id="4_skate"]
 [ext_resource type="PackedScene" uid="uid://cfrjq1vdbu4n4" path="res://scenes/magnet.tscn" id="5_magnet"]
 [ext_resource type="PackedScene" uid="uid://ul6cjck0li0v" path="res://scenes/pogostick.tscn" id="6_pogo"]
-
-[sub_resource type="Gradient" id="Gradient_o6xl0"]
-
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_24o6i"]
-gradient = SubResource("Gradient_o6xl0")
+[ext_resource type="PackedScene" uid="uid://bifw6qfpoismc" path="res://scenes/boss.tscn" id="8_tipki"]
 
 [node name="Main" type="Node2D" unique_id=1181504018]
 
@@ -24,24 +20,19 @@ parameters/looping = true
 [node name="Map" parent="." unique_id=766761700 instance=ExtResource("1_0wfyh")]
 
 [node name="Player" parent="." unique_id=461050695 instance=ExtResource("2_sugp2")]
-position = Vector2(-16, -147)
+position = Vector2(-870, -95)
 
 [node name="Stick" parent="." unique_id=74791253 instance=ExtResource("3_sugp2")]
-position = Vector2(113, -313)
+position = Vector2(-268, -233)
 
 [node name="Skateboard" parent="." unique_id=1687774358 instance=ExtResource("4_skate")]
-position = Vector2(-154, -313)
+position = Vector2(-23, -413)
 
 [node name="Magnet" parent="." unique_id=1780770223 instance=ExtResource("5_magnet")]
-position = Vector2(161, -51)
+position = Vector2(-368, 0)
 
 [node name="Pogostick" parent="." unique_id=385510732 instance=ExtResource("6_pogo")]
-position = Vector2(407, -29)
+position = Vector2(-256, -556)
 
-[node name="PointLight2D" type="PointLight2D" parent="." unique_id=4349497]
-position = Vector2(0, -300)
-scale = Vector2(1, 23.400003)
-energy = 0.5
-shadow_enabled = true
-texture = SubResource("GradientTexture1D_24o6i")
-texture_scale = 50.0
+[node name="Node2D" parent="." unique_id=1423784332 instance=ExtResource("8_tipki")]
+position = Vector2(-137, -699)

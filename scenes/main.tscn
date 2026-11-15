@@ -8,6 +8,8 @@
 [ext_resource type="PackedScene" uid="uid://cfrjq1vdbu4n4" path="res://scenes/magnet.tscn" id="5_magnet"]
 [ext_resource type="PackedScene" uid="uid://ul6cjck0li0v" path="res://scenes/pogostick.tscn" id="6_pogo"]
 [ext_resource type="PackedScene" uid="uid://bifw6qfpoismc" path="res://scenes/boss.tscn" id="8_tipki"]
+[ext_resource type="PackedScene" uid="uid://cvrb7y03a6yxb" path="res://scenes/sign1.tscn" id="9_85g3d"]
+[ext_resource type="PackedScene" uid="uid://dy2jygwbinc5r" path="res://scenes/inventory.tscn" id="10_inv"]
 
 [node name="Main" type="Node2D" unique_id=1181504018]
 
@@ -35,4 +37,11 @@ position = Vector2(-368, 0)
 position = Vector2(-256, -556)
 
 [node name="Node2D" parent="." unique_id=1423784332 instance=ExtResource("8_tipki")]
-position = Vector2(-137, -699)
+position = Vector2(-144, -794)
+
+[node name="Sign" parent="." unique_id=1150364895 instance=ExtResource("9_85g3d")]
+position = Vector2(-783, 0)
+
+[node name="HUD" type="CanvasLayer" parent="." unique_id=1419715610]
+
+[node name="Inventory" parent="HUD" unique_id=8846401 instance=ExtResource("10_inv")]

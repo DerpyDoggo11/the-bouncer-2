@@ -1,7 +1,7 @@
 extends Item
 
 @export var foot_length := 14.0
-@export var boost := 1.5
+@export var boost := 1.3
 @export var min_launch_speed := 00.0
 @export var min_landing_speed := 40.0
 

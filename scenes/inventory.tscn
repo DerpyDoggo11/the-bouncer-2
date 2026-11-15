@@ -1,0 +1,64 @@
+[gd_scene format=3 uid="uid://dy2jygwbinc5r"]
+
+[ext_resource type="Texture2D" uid="uid://daot6b0f84jpl" path="res://assets/uiItemSelectionAvailableAndUnavailableItems.png" id="1_qw0r6"]
+[ext_resource type="Script" path="res://scripts/inventory.gd" id="2_inv"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hj2ta"]
+atlas = ExtResource("1_qw0r6")
+region = Rect2(0, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ty45s"]
+atlas = ExtResource("1_qw0r6")
+region = Rect2(0, 48, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_53g1v"]
+atlas = ExtResource("1_qw0r6")
+region = Rect2(0, 96, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yyk2a"]
+atlas = ExtResource("1_qw0r6")
+region = Rect2(0, 144, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uae8j"]
+atlas = ExtResource("1_qw0r6")
+region = Rect2(0, 192, 48, 48)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_24o6i"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hj2ta")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ty45s")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_53g1v")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yyk2a")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uae8j")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Inventory" type="Control" unique_id=1940915822]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("2_inv")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1895913648]
+texture_filter = 1
+position = Vector2(74, 574)
+scale = Vector2(3, 3)
+sprite_frames = SubResource("SpriteFrames_24o6i")
+frame_progress = 0.38611162

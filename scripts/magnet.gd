@@ -2,14 +2,15 @@ extends Item
 
 const MAGNETIC_DATA := "magnetic"
 
-@export var reach := 30.0
+@export var reach := 60.0
 @export var tip_length := 16.0
 @export var pull_far := 1000.0
 @export var pull_near := 3000.0
+## After letting go, sticking re-arms once the player leaves the wall or this many seconds pass.
 @export var release_cooldown := 0.5
 ## How close (px) the tip must get to a magnetic tile to stick.
 @export var snap_radius := 4.0
-## Sticks if the player's body is this close to a magnetic tile and the magnet faces it.
+## Sticks if the player's body center is this close to a magnetic tile, whichever way the magnet faces.
 @export var contact_radius := 12.0
 
 var cooldown := 0.0
@@ -20,9 +21,6 @@ func held_physics(holder: RigidBody2D, delta: float) -> void:
 	if holder.freeze:
 		cooldown = release_cooldown
 		return
-	cooldown -= delta
-	if cooldown > 0.0:
-		return
 	if layers.is_empty():
 		for layer in get_tree().root.find_children("*", "TileMapLayer", true, false):
 			if layer.collision_enabled and layer.tile_set:
@@ -31,6 +29,13 @@ func held_physics(holder: RigidBody2D, delta: float) -> void:
 	var to_center := global_position - start
 	var dir := to_center.normalized()
 	var tip := to_center.length() + tip_length
+	if cooldown > 0.0:
+		cooldown -= delta
+		# Still touching the wall just launched from (by body or magnet tip): don't grab it again yet.
+		if _closest_magnetic(start, contact_radius).is_finite() \
+				or _closest_magnetic(start + dir * tip, snap_radius * 2.0).is_finite():
+			return
+		cooldown = 0.0
 	if _snap(holder, dir, tip, delta):
 		return
 	var query := PhysicsRayQueryParameters2D.create(start, start + dir * (tip + reach), holder.collision_mask, [holder.get_rid()])
@@ -55,10 +60,8 @@ func _snap(holder: RigidBody2D, dir: Vector2, tip: float, delta: float) -> bool:
 		var target := _closest_magnetic(tip_pos, snap_radius)
 		if target.is_finite():
 			pos += target - tip_pos # pull in flush against the tile
-		else:
-			target = _closest_magnetic(pos, contact_radius)
-			if not target.is_finite() or (target - pos).normalized().dot(dir) < 0.5:
-				continue
+		elif not _closest_magnetic(pos, contact_radius).is_finite():
+			continue
 		holder.global_position = pos
 		holder.linear_velocity = Vector2.ZERO
 		holder.angular_velocity = 0.0

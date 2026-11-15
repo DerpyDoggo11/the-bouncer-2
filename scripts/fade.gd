@@ -17,11 +17,12 @@ func _ready() -> void:
 
 func change_scene(path: String) -> void:
 	rect.mouse_filter = Control.MOUSE_FILTER_STOP # block clicks mid-fade
-	var tween := create_tween()
+	var tween := create_tween().set_ignore_time_scale()
 	tween.tween_property(rect, "modulate:a", 1.0, DURATION)
 	await tween.finished
 	get_tree().change_scene_to_file(path)
-	tween = create_tween()
+	Engine.time_scale = 1.0
+	tween = create_tween().set_ignore_time_scale()
 	tween.tween_property(rect, "modulate:a", 0.0, DURATION)
 	await tween.finished
 	rect.mouse_filter = Control.MOUSE_FILTER_IGNORE

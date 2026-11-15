@@ -1,0 +1,61 @@
+[gd_scene format=3 uid="uid://b5usx8qxp7efe"]
+
+[ext_resource type="Texture2D" uid="uid://t5y06jy7f1jq" path="res://assets/BossUfoPng.png" id="1_7ct0a"]
+[ext_resource type="AudioStream" uid="uid://d215qfqu258ge" path="res://assets/universfield-punch-impact-hit-567196.mp3" id="2_3ukdq"]
+[ext_resource type="Script" path="res://scripts/end_screen.gd" id="3_end"]
+
+[sub_resource type="Gradient" id="Gradient_vn56n"]
+colors = PackedColorArray(0.8630191, 0.9802715, 0.9511935, 1, 0.2763353, 0.5997197, 0.55311525, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_p1iid"]
+gradient = SubResource("Gradient_vn56n")
+width = 1
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_ng7qx"]
+random_pitch = 1.4142135
+streams_count = 1
+stream_0/stream = ExtResource("2_3ukdq")
+
+[node name="endScreen" type="Control" unique_id=1581077640]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("3_end")
+
+[node name="BossUfoPng" type="Sprite2D" parent="." unique_id=324266532]
+texture_filter = 1
+position = Vector2(595, 283)
+texture = ExtResource("1_7ct0a")
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="BossUfoPng" unique_id=1445001030]
+position = Vector2(2, 15)
+emitting = false
+amount = 30
+texture = SubResource("GradientTexture1D_p1iid")
+one_shot = true
+explosiveness = 1.0
+direction = Vector2(0, 0)
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 800.0
+initial_velocity_max = 1000.0
+angular_velocity_min = -200.0
+angular_velocity_max = 200.0
+scale_amount_min = 20.0
+scale_amount_max = 20.0
+
+[node name="Explosion" type="AudioStreamPlayer" parent="." unique_id=1375922310]
+stream = SubResource("AudioStreamRandomizer_ng7qx")
+volume_db = -10.0
+
+[node name="TimeLabel" type="Label" parent="."]
+layout_mode = 0
+offset_left = 445.0
+offset_top = 360.0
+offset_right = 745.0
+offset_bottom = 400.0
+theme_override_font_sizes/font_size = 32
+horizontal_alignment = 1

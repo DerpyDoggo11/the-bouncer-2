@@ -7,7 +7,7 @@ const SLOW_MO := 0.2
 const DOT_COUNT := 20
 const DOT_STEP := 0.05
 const DOT_SIZE := 2.0
-const TURN_SPEED := 6.0
+const TURN_SPEED := 10.0
 const TURN_RESPONSE := 10.0
 const ZOOM_OUT_SPEED := 600.0
 const MIN_ZOOM_FACTOR := 0.4
@@ -22,6 +22,7 @@ const HIT_SPEED := 150.0 # impact speed that plays the hit sound
 @onready var hit_sound: AudioStreamPlayer = $Hit
 
 var dragging := false
+var can_jump := true # recharged by touching the floor (body or held item) or sticking with the magnet
 var dots := Node2D.new()
 var dot_points: PackedVector2Array = []
 var impact_velocity := Vector2.ZERO # velocity before this physics step, since body_entered sees it post-bounce
@@ -82,13 +83,31 @@ func _unhandled_input(event: InputEvent) -> void:
 			_toggle_equip(event.keycode - KEY_KP_1)
 	if not (event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT):
 		return
-	if event.pressed and get_global_mouse_position().distance_to(global_position) < GRAB_RADIUS:
+	if event.pressed and (can_jump or freeze) and get_global_mouse_position().distance_to(global_position) < GRAB_RADIUS:
 		dragging = true
 	elif not event.pressed and dragging:
 		dragging = false
+		can_jump = false
 		freeze = false # e.g. stuck by a magnet
 		linear_velocity = _launch_velocity()
 		jump_sound.play()
+
+
+# Called deferred by the map, since physics state can't change mid-callback.
+func respawn(pos: Vector2) -> void:
+	freeze = false
+	global_position = pos
+	linear_velocity = Vector2.ZERO
+	angular_velocity = 0.0
+	can_jump = true
+	reset_physics_interpolation()
+
+
+# Held items' shapes are part of this body, so a stick touching the floor counts too.
+func _integrate_forces(state: PhysicsDirectBodyState2D) -> void:
+	for i in state.get_contact_count():
+		if state.get_contact_local_normal(i).dot(Vector2.UP) > 0.5:
+			can_jump = true
 
 
 func _launch_velocity() -> Vector2:
@@ -123,18 +142,12 @@ func _toggle_equip(slot: int) -> void:
 	if slot >= inventory.size():
 		return
 	var item := inventory[slot]
-	if item in equipped:
-		for shape in held_shapes[item]:
-			shape.queue_free()
-		held_shapes.erase(item)
-		equipped.erase(item)
-		item.hide()
-		freeze = false # e.g. stuck by a magnet
+	var was_equipped := item in equipped
+	# Only one item at a time: equipping swaps out whatever is held.
+	for other in equipped.duplicate():
+		_unequip(other)
+	if was_equipped:
 		return
-	# Refuse if an equipped item already sits in that direction.
-	for other in equipped:
-		if (other.global_position - global_position).normalized().dot(item.hold_offset.normalized()) > 0.9:
-			return
 	# Attach at hold_offset in world space, whichever way the ball is spun.
 	# From then on it's rigidly part of the player and turns with it.
 	var hold := Transform2D(deg_to_rad(item.hold_rotation_degrees), global_position + item.hold_offset)
@@ -153,6 +166,15 @@ func _toggle_equip(slot: int) -> void:
 			copies.append(copy)
 	held_shapes[item] = copies
 	equipped.append(item)
+
+
+func _unequip(item: Item) -> void:
+	for shape in held_shapes[item]:
+		shape.queue_free()
+	held_shapes.erase(item)
+	equipped.erase(item)
+	item.hide()
+	freeze = false # e.g. stuck by a magnet
 
 
 # The lowest equipped item underneath is the one touching the ground, so it sets bounce/friction.

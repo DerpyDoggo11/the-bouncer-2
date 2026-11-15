@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://cfrjq1vdbu4n4"]
+
+[ext_resource type="Texture2D" uid="uid://6fg6fwmfc3yr" path="res://assets/Magnet.png" id="1_yp8jf"]
+[ext_resource type="Script" uid="uid://tk3fgiwogort" path="res://scripts/magnet.gd" id="2_magnet"]
+
+[sub_resource type="RectangleShape2D" id="MagnetShape"]
+size = Vector2(12, 12)
+
+[node name="Magnet" type="RigidBody2D" unique_id=587740269]
+mass = 0.3
+script = ExtResource("2_magnet")
+tip_length = 6.0
+hold_offset = Vector2(0, -11)
+collides_when_held = false
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1428598541]
+texture_filter = 1
+texture = ExtResource("1_yp8jf")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1557677698]
+shape = SubResource("MagnetShape")

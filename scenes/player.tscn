@@ -1,0 +1,60 @@
+[gd_scene format=3 uid="uid://f57np4gjqh7o"]
+
+[ext_resource type="Script" uid="uid://c2hj5o6lxgavj" path="res://scripts/player.gd" id="1_g2els"]
+[ext_resource type="Texture2D" uid="uid://cd7h5a4uwnjnn" path="res://assets/SlimeBodySmall.png" id="2_fjrip"]
+[ext_resource type="Texture2D" uid="uid://b650wehrwqsh4" path="res://assets/SlimeBody.png" id="3_smehm"]
+[ext_resource type="Texture2D" uid="uid://dl6b8bp88l6or" path="res://assets/SlimeBodyBig.png" id="4_ur7pv"]
+[ext_resource type="Texture2D" uid="uid://b0ouh5p7266pb" path="res://assets/SlimeLightAndShadowSmall.png" id="5_y4r1p"]
+[ext_resource type="Texture2D" uid="uid://3isxs46wocso" path="res://assets/SlimeLightAndShadow.png" id="6_d2wvv"]
+[ext_resource type="Texture2D" uid="uid://dqcnj70asj2xf" path="res://assets/SlimeLightAndShadowBigl.png" id="7_3v2ag"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_bounce"]
+friction = 0.8
+bounce = 0.7
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_hrmi8"]
+radius = 7.0
+
+[node name="Player" type="RigidBody2D" unique_id=461050695]
+physics_material_override = SubResource("PhysicsMaterial_bounce")
+script = ExtResource("1_g2els")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1474258454]
+shape = SubResource("CircleShape2D_hrmi8")
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=572899676]
+zoom = Vector2(5, 5)
+position_smoothing_enabled = true
+position_smoothing_speed = 8.0
+
+[node name="Body" type="Node2D" parent="." unique_id=1378637553]
+
+[node name="SmallBody" type="Sprite2D" parent="Body" unique_id=2043082725]
+visible = false
+texture_filter = 1
+texture = ExtResource("2_fjrip")
+
+[node name="MediumBody" type="Sprite2D" parent="Body" unique_id=280468680]
+texture_filter = 1
+texture = ExtResource("3_smehm")
+
+[node name="LargeBody" type="Sprite2D" parent="Body" unique_id=1585933667]
+visible = false
+texture_filter = 1
+texture = ExtResource("4_ur7pv")
+
+[node name="Shadow" type="Node2D" parent="." unique_id=1189824063]
+
+[node name="SmallShadow" type="Sprite2D" parent="Shadow" unique_id=979440900]
+visible = false
+texture_filter = 1
+texture = ExtResource("5_y4r1p")
+
+[node name="MediumShadow" type="Sprite2D" parent="Shadow" unique_id=957167693]
+texture_filter = 1
+texture = ExtResource("6_d2wvv")
+
+[node name="LargeShadow" type="Sprite2D" parent="Shadow" unique_id=1959746901]
+visible = false
+texture_filter = 1
+texture = ExtResource("7_3v2ag")

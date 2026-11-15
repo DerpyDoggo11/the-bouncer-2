@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://bsibhljmv3qd8"]
+
+[ext_resource type="Texture2D" uid="uid://bwvbv75yg032p" path="res://assets/SlickStick.png" id="1_i3vek"]
+[ext_resource type="Script" path="res://scripts/item.gd" id="2_item"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_24o6i"]
+size = Vector2(4, 31)
+
+[node name="Stick" type="RigidBody2D" unique_id=74791253]
+mass = 0.3
+script = ExtResource("2_item")
+hold_rotation_degrees = 90.0
+bounce_when_below = 0.1
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1805501258]
+texture_filter = 1
+texture = ExtResource("1_i3vek")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1867176996]
+position = Vector2(0, -0.5)
+shape = SubResource("RectangleShape2D_24o6i")

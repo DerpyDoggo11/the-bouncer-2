@@ -1,0 +1,63 @@
+[gd_scene format=3 uid="uid://ul6cjck0li0v"]
+
+[ext_resource type="Texture2D" uid="uid://dyhpltm47vuls" path="res://assets/PogoStick.png" id="1_lgc10"]
+[ext_resource type="Script" uid="uid://bm4ba3tde7614" path="res://scripts/pogostick.gd" id="2_pogo"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m6b4s"]
+atlas = ExtResource("1_lgc10")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_idm1j"]
+atlas = ExtResource("1_lgc10")
+region = Rect2(0, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cqwnt"]
+atlas = ExtResource("1_lgc10")
+region = Rect2(0, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mimj8"]
+atlas = ExtResource("1_lgc10")
+region = Rect2(0, 96, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1eij3"]
+atlas = ExtResource("1_lgc10")
+region = Rect2(0, 128, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_24o6i"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_m6b4s")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_idm1j")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cqwnt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mimj8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1eij3")
+}],
+"loop": 0,
+"name": &"default",
+"speed": 20.0
+}]
+
+[sub_resource type="RectangleShape2D" id="Foot"]
+size = Vector2(4, 10)
+
+[node name="Pogostick" type="RigidBody2D" unique_id=1164465325]
+mass = 0.3
+script = ExtResource("2_pogo")
+hold_offset = Vector2(0, 6)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1825286140]
+texture_filter = 1
+sprite_frames = SubResource("SpriteFrames_24o6i")
+
+[node name="Foot" type="CollisionShape2D" parent="." unique_id=752352085]
+position = Vector2(0, 9)
+shape = SubResource("Foot")
